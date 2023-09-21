@@ -17,7 +17,7 @@ let recipes = [];
 // Event listeners
 searchForm.addEventListener('submit', handleSearch);
 searchBtn.addEventListener('click', handleSearch);
-suggestBtn.addEventListener('click', suggestRecipe);
+
 function handleSearch(event) {
   event.preventDefault();
   console.log('Search button clicked');
@@ -25,12 +25,10 @@ function handleSearch(event) {
   if (searchQuery !== '') {
     from = 0;
     to = 50;
-    resultsSection.innerHTML = '';
-    fetchRecipes(searchQuery, from, to);
+    // Pass 'true' as the last argument to clear previous results
+    fetchRecipes(searchQuery, from, to, true);
   }
 }
-
-
 
 // Fetch recipes
 async function fetchRecipes(query, from, to, clearResults) {
@@ -49,6 +47,8 @@ async function fetchRecipes(query, from, to, clearResults) {
     console.log(error);
   }
 }
+
+
 // Display recipes
 function displayRecipes(recipes) {
   if (recipes.length > 0) {
