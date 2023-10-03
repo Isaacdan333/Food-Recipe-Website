@@ -1,0 +1,110 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.column {
+  background-color: rgb(255, 254, 254);
+  box-shadow: 2px 2px 12px #aaa;
+}
+
+.mini-column {
+  background-color: rgb(136, 131, 131);
+  padding: 0.5em;
+  text-align: center;
+  font-weight: bold;
+}
+
+
+.scrollable {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav h1 {
+  margin: 0 auto; /* Centers the h1 */
+  font-size: 50px;
+
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 20px; /* Spacing between items */
+}
+
+nav li {
+  list-style-type: none;
+}
+
+nav input, nav button, nav a {
+  padding: 1em;
+  margin: 0;
+  border: none;
+  background: #e3e3e3;
+  cursor: pointer;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+nav a:hover, nav button:hover {
+  background: #ccc;
+  box-shadow: 0px 4px 5px -2px gray;
+}
+
+nav a#about-btn:hover {
+  transform: scale(1.05);
+}
+
+
+
+.recipe {
+  background-color: gray
+}
+.recipe img {
+  min-width: 100%;
+  height: 300px;
+  align-items: center;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.recipe button {
+  background-color: #50b3a2;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  text-align: center;
+  user-select: none;
+}
+
+.recipe button:hover {
+  background-color: #338977;
+  color: white;
+}
+
