@@ -1,6 +1,6 @@
 // API credentials
 const APP_ID = '072eb70b';
-const APP_KEY = 'db7277ebc3842274d74e4a4b9c002cae	';
+const APP_KEY = 'db7277ebc3842274d74e4a4b9c002cae';
 
 // DOM elements
 const searchForm = document.querySelector('#search-form');
