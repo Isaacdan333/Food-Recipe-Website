@@ -1,10 +1,33 @@
+<?php
+// Check if the form was submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve user input
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    // Replace with your actual username and password validation logic
+    $validUsername = "your_username";
+    $validPassword = "your_password";
+
+    // Check if the submitted username and password match the valid credentials
+    if ($username === $validUsername && $password === $validPassword) {
+        // Authentication successful, redirect to a secure page
+        header("Location: secure_page.php");
+        exit;
+    } else {
+        // Authentication failed, display an error message
+        echo "Invalid username or password.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sign Up Page</title>
+    <title>Login Page</title>
     <style>
         body {
-            background-image: url('images/Foods.jpeg');
+            background-image: url('Background Image/Foods.jpeg');
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -24,7 +47,7 @@
 <body>
     <div id="login-container">
         <h2>Login</h2>
-        <form action="config.php" method="POST">
+        <form action="login.php" method="POST">
             <label for="username"><b>Username:</b></label>
             <input type="text" id="username" name="username" required><br><br>
             
@@ -36,4 +59,3 @@
     </div>
 </body>
 </html>
-
