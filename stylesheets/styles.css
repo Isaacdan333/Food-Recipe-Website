@@ -82,16 +82,39 @@ nav a#about-btn:hover {
   transform: scale(1.05);
 }
 
+/* Improved Styles for Recipe, Recipe Image, and Recipe Button */
+
 .recipe {
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   margin-inline: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
+
+/* Improved Styles for Recipe Images with Fixed Dimensions */
+
 .recipe img {
-  min-width: 100%;
-  height: 300px;
-  align-items: center;
+  width: 300px; /* Set a fixed width for the images */
+  height: 200px; /* Set a fixed height for the images */
   object-fit: cover;
-  border-radius: 800px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+
+.recipe h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+  text-shadow: rgba(0, 0, 0, 0.2) 10px 10px 4px;
+}
+
+.recipe p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
 }
 
 .recipe button {
@@ -101,15 +124,14 @@ nav a#about-btn:hover {
   border: none;
   cursor: pointer;
   text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+  font-size: 18px;
+  border-radius: 5px;
   transition-duration: 0.4s;
-  text-align: center;
   user-select: none;
 }
 
 .recipe button:hover {
-  background-color: #2c8e34;
+  background-color: #3ca63c;
   color: white;
 }
+
