@@ -62,3 +62,28 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('load', fetchAndDisplayMeals);
 
 });
+
+// Dark Mode Toggle Logic
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.getElementById('darkModeToggle');
+    const currentMode = localStorage.getItem('darkMode');
+    
+    // Check user preference in localStorage
+    if (currentMode === 'enabled') {
+        document.body.classList.add('dark-mode');
+        toggleButton.innerText = "Toggle Light Mode";
+    }
+    
+    // Add event listener to the toggle button
+    toggleButton.addEventListener('click', function() {
+        if (document.body.classList.contains('dark-mode')) {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('darkMode', 'disabled');
+            toggleButton.innerText = "Toggle Dark Mode";
+        } else {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('darkMode', 'enabled');
+            toggleButton.innerText = "Toggle Light Mode";
+        }
+    });
+});
