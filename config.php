@@ -17,7 +17,7 @@ $name = $_POST["username"];
 $userkey = $_POST["password"];
 
 $host = "localhost";
-$dbname = "recipewebsite";
+$dbname = "users";
 $username = "root";
 $password = "";
 
