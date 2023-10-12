@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Delicious Recipes</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <script src="https://kit.fontawesome.com/7183df4a39.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        
+
+        .container {
+            display: flex;
+            align-items: center;
+            padding: 0; /* Removed padding */
+            margin: 0 auto;
+            height: 100vh; /* Set the container height to 100% of the viewport height */
+        }
+
+        .food-image {
+            flex: 1;
+            background-image: url('https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=2000'); /* Replace 'path-to-your-image.jpg' with the actual image file path */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.7; /* Adjust the opacity level as needed (0.7 = 70%) */
+            width: 100%; /* Make the image take the full width of the container */
+            height: 100%; /* Make the image take the full height of the container */
+        }
+
+        .content {
+            flex: 2; /* Adjust the ratio as needed */
+        }
+
+        h2 {
+            font-size: 24px;
+            margin: 0 0 20px;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 0 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <h1><a href="index.html">Delicious Recipes</a></h1>
+        <ul>
+            <li><a href="login.html" title="Login/Signup">Login/Signup</a></li>
+            <li><a href="search.html" title="Search for Recipes">Search for Recipes</a></li>
+            <li><a href="https://www.youtube.com/watch?v=cvh0nX08nRw" title="Home">Home</a></li>
+            <li><a href="about.html" title="About Me">About Me</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="food-image">
+            
+        </div>
+        <div class="content">
+            <h2>About Us</h2>
+            <p>Welcome to the Delicious Recipe Website. This site is a project by Joshua Tamara, Isaac Perrez, Justin Dong, and Ulysses Carbajal. We are a group of hardworking students who are learning software development and creating a website for our project.</p>
+
+            <p>This website uses an API that hosts all the websites we are using for all of the recipes. Here's the link:</p>
+            <a href="https://developer.edamam.com/edamam-recipe-api" title="The API we are using">Edamam Recipe API</a>
+
+            <p>Feel free to reach out if you have any questions or suggestions. Happy cooking!</p>
+        </div>
+        
+    </div>
+
+
+
+</body>
+
+</html>
