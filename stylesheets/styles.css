@@ -17,15 +17,15 @@ body {
 }
 
 .mini-column {
-  background-color: rgb(208, 94, 94);
+  background-color: rgb(224, 227, 31);
   padding: 0.5em;
   text-align: center;
   font-weight: bold;
 }
 
 .mini-column:hover {
-  background-color: #c75f5f;
-  color: white;
+  background-color: #eaff01;
+  color: black;
   transform: scale(1.25);
   transition: transform 00ms ease-in-out;
   
@@ -118,16 +118,15 @@ nav a#about-btn:hover {
 }
 
 .recipe button {
-  background-color: #5cc75a;
-  color: #fff;
-  padding: 10px 20px;
+  font-size: 20px;
+  font-family: "Readex Pro", sans-serif;
+  padding: 0.5em 1em;
+  margin: 0.25em;
+  border-radius: 1em;
   border: none;
+  outline: none;
+  background: #dddddd;
   cursor: pointer;
-  text-decoration: none;
-  font-size: 18px;
-  border-radius: 5px;
-  transition-duration: 0.4s;
-  user-select: none;
 }
 
 .recipe button:hover {

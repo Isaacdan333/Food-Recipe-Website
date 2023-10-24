@@ -47,7 +47,7 @@ mysqli_stmt_bind_param($stmt, "ss", $name, $userkey);
 
 mysqli_stmt_execute($stmt);
 
-echo "Record saved.";
-echo "Thank you."
+
+header("Location: index.html");
 
 ?>
