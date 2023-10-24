@@ -12,7 +12,14 @@
             height: 100vh;
             margin: 0;
         }
-        #login-container {
+        #loginForm {
+            background-color: #ffffff90; 
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        #signupForm {
             background-color: #ffffff90; 
             padding: 20px;
             border-radius: 5px;
@@ -22,18 +29,35 @@
     </style>
 </head>
 <body>
-    <div id="login-container">
-        <h2>Login</h2>
-        <form action="config.php" method="POST">
-            <label for="username"><b>Username:</b></label>
-            <input type="text" id="username" name="username" required><br><br>
-            
-            <label for="password"><b>Password:</b></label>
-            <input href="login.php" type="password" id="password" name="password" required><br><br>
+    
+<div id="login-container">
+    <h2>Login</h2>
+    <form id="loginForm">
+        <label for="username"><b>Email:</b></label>
+        <input type="email" id="username" name="username" required minlength="6" autofocus autocomplete="given-name"><br><br>
+        
+        
+        <label for="password"><b>Password:</b></label>
+        <input type="password" id="password" name="password" required><br><br>
 
-            <input type="submit" value="Login">
-        </form>
-    </div>
+        <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="#" id="showSignup">Sign Up!</a></p>
+</div>
+
+<div id="signup-container" style="display: none;">
+    <h2>Sign Up</h2>
+    <form id="signupForm">
+        <label for="signupEmail"><b>Email:</b></label>
+        <input type="email" id="signupEmail" name="signupEmail" required minlength="6"><br><br>
+        
+        <label for="signupPassword"><b>Password:</b></label>
+        <input type="password" id="signupPassword" name="signupPassword" required pattern="(?=.*[A-Z])(?=.*[0-9]).*"><br><br>
+        <span id="passwordWarning" style="color: red; display: none;">Password must contain at least one number and one uppercase letter.</span><br>
+
+        <button type="submit">Sign Up</button>
+    </form>
+</div>
 </body>
 </html>
 
