@@ -27,30 +27,20 @@
     </div>
 
 
-<div class="container">
-<div class="column column_1">
-<div class="mini-column">Breakfast</div>
-<div class="banner-column"></div>
-<div class="scrollable"></div>
+<div class="tab-list">
+    <button onclick="fetchAndDisplayMeals('breakfast')">Breakfast</button>
+    <button onclick="fetchAndDisplayMeals('lunch')">Lunch</button>
+    <button onclick="fetchAndDisplayMeals('dinner')">Dinner</button>
+    <div class="dropdown">
+        <button onclick="toggleDropdown()">Dish Types</button>
+        <div id="dish-dropdown" class="dropdown-content">
+        </div>
+    </div>
 </div>
+<div id="results-title"></div>
+<div id="results"></div>
 
-
-<div class="column column_2">
-<div class="mini-column">Lunch</div>
-<div class="banner-column"></div>
-<div class="scrollable"></div>
-</div>
-
-<div class="column column_3">
-<div class="mini-column">Dinner</div>
-<div class="banner-column"></div>
-<div class="scrollable"></div>
-</div>
-
-<div id="results">
-    <div class="scrollable"></div>
-</div>
 
 <script src="scripts/index_api.js"></script>
-</div></body>
+</body>
 </html>

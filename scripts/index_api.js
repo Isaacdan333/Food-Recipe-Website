@@ -14,25 +14,17 @@ const searchInput = document.querySelector('#search-input');
 const resultsSection = document.querySelector('#results');
 
 // Function Definitions
-
 async function fetchRecipes(query, from, to, clearResults, columnId) {
     const url = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=${from}&to=${to}`;
-    console.log("fetchRecipes called");
-console.log("URL: ", url);
     try {
         const response = await fetch(url);
         const data = await response.json();
-        const targetDiv = columnId === 'results' ? resultsSection :
-    document.querySelector(`.${columnId} .scrollable`);
-
         if (clearResults) {
-            targetDiv.innerHTML = ''; // Clear previous results
+            resultsSection.innerHTML = '';
         }
-        displayRecipes(data.hits, targetDiv); // Pass scrollableDiv to displayRecipes function
-
-        // Update global variable with fetched recipes
-        allRecipes = data.hits;
-
+        allRecipes = [...allRecipes, ...data.hits];
+        populateDishTypes();
+        displayRecipes(data.hits, resultsSection);
     } catch (error) {
         console.log(error);
     }
@@ -42,6 +34,7 @@ function displayRecipes(recipes, resultsSection) {
     if (recipes.length > 0) {
         resultsSection.innerHTML = '';
         recipes.forEach((recipe) => {
+            const servingSize = recipe.recipe.yield || 'N/A';  
             const recipeCard = `
                  <div class="recipe">
                      <img src="${recipe.recipe.image}" alt="${recipe.recipe.label}">
@@ -49,6 +42,7 @@ function displayRecipes(recipes, resultsSection) {
                      <p><strong>Calories:</strong> ${Math.round(recipe.recipe.calories)}</p>
                      <button onclick="window.open('${recipe.recipe.url}', '_blank')">Get Recipe</button>
                      <button class="save-recipe" data-recipe-id="${recipe.recipe.uri}">Save</button>
+                     <p><strong>Servings:</strong> ${servingSize}</p> 
                  </div>
              `;
             resultsSection.insertAdjacentHTML('beforeend', recipeCard);
@@ -63,28 +57,28 @@ function getRandomQuery(queries) {
     return queries[randomIndex];
 }
 
-function fetchAndDisplayMeals() {
-    const breakfastQuery = getRandomQuery(['pancakes', 'omelette', 'cereal', 'toast']);
-    const lunchQuery = getRandomQuery(['sandwich', 'pasta', 'burger']);
-    const dinnerQuery = getRandomQuery(['steak', 'pizza', 'soup', 'stir fry']);
-    
-    fetchRecipes(breakfastQuery, 0, 30, true, 'column_1');
-    fetchRecipes(lunchQuery, 0, 30, true, 'column_2');
-    fetchRecipes(dinnerQuery, 0, 30, true, 'column_3');
+async function fetchAndDisplayMeals(mealType) {
+    await fetchRecipes(mealType, 0, 30, true, 'results');
 }
+
 
 function toggleView(isSearch) {
-    const mealColumns = document.querySelectorAll('.column');
-    const searchResults = document.querySelector('#results');
+    const tabList = document.querySelector('.tab-list');
+    const resultsTitle = document.getElementById('results-title');
+    const results = document.getElementById('results');
 
     if (isSearch) {
-        mealColumns.forEach(column => column.style.display = 'none');
-        searchResults.style.display = 'grid';
+        tabList.style.display = 'none';
+        results.style.display = 'grid';
     } else {
-        mealColumns.forEach(column => column.style.display = 'block');
-        searchResults.style.display = 'none';
+        tabList.style.display = 'flex';
+        results.style.display = 'grid';  
+        resultsTitle.innerHTML = '';
     }
 }
+
+
+
 
 function debounce(func, delay) {
     let debounceTimer;
@@ -98,19 +92,23 @@ function debounce(func, delay) {
 
 async function handleAutoSearch() {
     const query = searchInput.value;
-    console.log("handleAutoSearch called");
-console.log("Query: ", query);
+    const resultsTitle = document.getElementById('results-title');
+
     if (query.length > 0) {
         await fetchRecipes(query, 0, 50, true, 'results');
         toggleView(true);
+        resultsTitle.innerHTML = `Results for: ${query}`;
     } else {
+        resultsTitle.innerHTML = '';
+        await fetchAndDisplayMeals('breakfast');  // Fetch default meals
         toggleView(false);
     }
 }
 
 
+
 document.addEventListener('DOMContentLoaded', function () {
-    window.addEventListener('load', fetchAndDisplayMeals);
+    window.addEventListener('load', () => fetchAndDisplayMeals('breakfast'));
 });
 
 document.addEventListener('click', function(event) {
@@ -119,19 +117,53 @@ document.addEventListener('click', function(event) {
     }
 });
 
+function populateDishTypes() {
+    const dishTypes = compileDishTypes();
+    const dropdown = document.getElementById('dish-dropdown');
+    dropdown.innerHTML = '';
+    dishTypes.forEach((dish) => {
+        const item = document.createElement('a');
+        item.textContent = dish;
+        item.addEventListener('click', () => fetchAndDisplayMeals(dish));
+        dropdown.appendChild(item);
+    });
+}
+
+function compileDishTypes() {
+    const dishTypes = new Set();
+    allRecipes.forEach((recipe) => {
+        if (recipe.recipe.dishType) {
+            recipe.recipe.dishType.forEach((dish) => {
+                dishTypes.add(dish);
+            });
+        }
+    });
+    return Array.from(dishTypes);
+}
+
+function toggleDropdown() {
+    document.getElementById("dish-dropdown").classList.toggle("show");
+}
+
+document.querySelectorAll('.tab-list button').forEach(button => {
+    button.addEventListener('click', function() {
+        document.querySelectorAll('.tab-list button').forEach(btn => {
+            btn.classList.remove('selected');
+        });
+        this.classList.add('selected');
+    });
+});
 
 // Dark Mode Toggle Logic
 document.addEventListener('DOMContentLoaded', function() {
     const toggleButton = document.getElementById('darkModeToggle');
     const currentMode = localStorage.getItem('darkMode');
     
-    // Check user preference in localStorage
     if (currentMode === 'enabled') {
         document.body.classList.add('dark-mode');
         toggleButton.innerText = "Toggle Light Mode";
     }
     
-    // Add event listener to the toggle button
     toggleButton.addEventListener('click', function() {
         if (document.body.classList.contains('dark-mode')) {
             document.body.classList.remove('dark-mode');
@@ -144,4 +176,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
 searchInput.addEventListener('input', debounce(handleAutoSearch, 500));
