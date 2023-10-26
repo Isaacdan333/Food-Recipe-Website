@@ -40,9 +40,9 @@ function displayRecipes(recipes, resultsSection) {
                      <img src="${recipe.recipe.image}" alt="${recipe.recipe.label}">
                      <h2>${recipe.recipe.label}</h2>
                      <p><strong>Calories:</strong> ${Math.round(recipe.recipe.calories)}</p>
+                     <p><strong>Servings:</strong> ${servingSize}</p> 
                      <button onclick="window.open('${recipe.recipe.url}', '_blank')">Get Recipe</button>
                      <button class="save-recipe" data-recipe-id="${recipe.recipe.uri}">Save</button>
-                     <p><strong>Servings:</strong> ${servingSize}</p> 
                  </div>
              `;
             resultsSection.insertAdjacentHTML('beforeend', recipeCard);
