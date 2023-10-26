@@ -18,11 +18,11 @@
             <label for="floatingPassword">Password</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="fnameInp" placeholder="Password">
+            <input type="text" class="form-control" id="fnameInp" placeholder="First Name">
             <label for="floatingPassword">First Name</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="lnameInp" placeholder="Password">
+            <input type="text" class="form-control" id="lnameInp" placeholder="Last Name">
             <label for="floatingPassword">Last Name</label>
           </div>
 
@@ -71,6 +71,9 @@
                     firstname: FnameInp.value,
                     lastname: LnameInp.value
                 })
+                .then(() => {
+                    window.location.href = 'login.html';  // Redirect to login.html
+                });
             })
             .catch((error) =>{
                 alert(error.message);
