@@ -63,15 +63,15 @@ async function fetchAndDisplayMeals(mealType) {
 
 
 function toggleView(isSearch) {
-    const tabList = document.querySelector('.tab-list');
+    const navTabs = document.querySelector('.nav-tabs');
     const resultsTitle = document.getElementById('results-title');
     const results = document.getElementById('results');
 
     if (isSearch) {
-        tabList.style.display = 'none';
+        navTabs.style.display = 'none';
         results.style.display = 'grid';
     } else {
-        tabList.style.display = 'flex';
+        navTabs.style.display = 'flex';
         results.style.display = 'grid';  
         resultsTitle.innerHTML = '';
     }

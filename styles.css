@@ -218,29 +218,25 @@ nav h1 {
   padding: 20px;
 }
 /* Tab-list styling */
-.tab-list {
-  display: flex;
-  justify-content: space-around;
-  background-color: #ccc;
-  padding: 2px; 
-  margin-top: 10px;
+.nav-tabs {
+  display: flex; 
+  justify-content: space-between;
 }
 
-.tab-list button,
-.dropdown {
-  flex-grow: 1;  
-  background-color: #ccc;
-  border: none;
-  padding: 2px; 
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin: 10px 0;
-  width: 100%; 
+.nav-item {
+  flex-grow: 1; 
+  text-align: center; 
 }
 
-.tab-list button.selected {
-  background-color: #aaa;
+/* Style the tab buttons */
+.nav-link {
+  flex-grow: 1;
+  padding: 1rem 2rem;
+  font-size: 3rem; 
+  border: 1px solid transparent; 
+  width: 100%;
 }
+
 
 
 
