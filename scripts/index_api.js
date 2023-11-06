@@ -14,19 +14,21 @@ const searchInput = document.querySelector('#search-input');
 const resultsSection = document.querySelector('#results');
 
 // Function Definitions
-async function fetchRecipes(query, from, to, clearResults, columnId) {
-    const url = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=${from}&to=${to}`;
+async function fetchRecipes(query = '', fromParam = 0, toParam = 50, clearResults = true) {
+    const url = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=${fromParam}&to=${toParam}`;
     try {
         const response = await fetch(url);
         const data = await response.json();
         if (clearResults) {
             resultsSection.innerHTML = '';
         }
-        allRecipes = [...allRecipes, ...data.hits];
-        populateDishTypes();
-        displayRecipes(data.hits, resultsSection);
+        if (data.hits) {
+            allRecipes = [...allRecipes, ...data.hits]; 
+            populateDishTypes();
+            displayRecipes(data.hits, resultsSection);
+        }
     } catch (error) {
-        console.log(error);
+        console.error('Error fetching recipes:', error);
     }
 }
 
@@ -58,7 +60,7 @@ function getRandomQuery(queries) {
 }
 
 async function fetchAndDisplayMeals(mealType) {
-    await fetchRecipes(mealType, 0, 30, true, 'results');
+    await fetchRecipes(mealType, 0, 50, true, 'results');
 }
 
 
@@ -117,32 +119,11 @@ document.addEventListener('click', function(event) {
     }
 });
 
-function populateDishTypes() {
-    const dishTypes = compileDishTypes();
-    const dropdown = document.getElementById('dish-dropdown');
-    dropdown.innerHTML = ''; 
-    dishTypes.forEach((dish) => {
-        const listItem = document.createElement('li'); 
-        const link = document.createElement('a'); 
-        link.className = 'dropdown-item'; 
-        link.href = '#'; 
-        link.textContent = dish; 
-        link.addEventListener('click', (event) => {
-            event.preventDefault(); 
-            fetchAndDisplayMeals(dish); 
-        });
-        listItem.appendChild(link); 
-        dropdown.appendChild(listItem); 
-    });
-}
-
-
-
-function compileDishTypes() {
+async function compileDishTypes() {
     const dishTypes = new Set();
-    allRecipes.forEach((recipe) => {
-        if (recipe.recipe.dishType) {
-            recipe.recipe.dishType.forEach((dish) => {
+    allRecipes.forEach((recipeData) => {
+        if (recipeData.recipe.dishType) {
+            recipeData.recipe.dishType.forEach((dish) => {
                 dishTypes.add(dish);
             });
         }
@@ -150,17 +131,27 @@ function compileDishTypes() {
     return Array.from(dishTypes);
 }
 
-function toggleDropdown() {
-    document.getElementById("dish-dropdown").classList.toggle("show");
+async function populateDishTypes() {
+    const dishTypes = await compileDishTypes();
+    const dropdown = document.getElementById('dish-dropdown');
+    dropdown.innerHTML = ''; 
+    dishTypes.forEach((dish) => {
+        const listItem = document.createElement('li');
+        const link = document.createElement('a');
+        link.className = 'dropdown-item';
+        link.href = '#';
+        link.textContent = dish;
+        link.addEventListener('click', async (event) => {
+            event.preventDefault();
+            await fetchAndDisplayMeals(dish);
+        });
+        listItem.appendChild(link);
+        dropdown.appendChild(listItem);
+    });
 }
 
-document.querySelectorAll('.tab-list button').forEach(button => {
-    button.addEventListener('click', function() {
-        document.querySelectorAll('.tab-list button').forEach(btn => {
-            btn.classList.remove('selected');
-        });
-        this.classList.add('selected');
-    });
+fetchRecipes('', 0, 50).catch(error => {
+    console.error('Failed to fetch recipes:', error);
 });
 
 // Dark Mode Toggle Logic
