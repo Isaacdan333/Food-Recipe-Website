@@ -120,14 +120,23 @@ document.addEventListener('click', function(event) {
 function populateDishTypes() {
     const dishTypes = compileDishTypes();
     const dropdown = document.getElementById('dish-dropdown');
-    dropdown.innerHTML = '';
+    dropdown.innerHTML = ''; 
     dishTypes.forEach((dish) => {
-        const item = document.createElement('a');
-        item.textContent = dish;
-        item.addEventListener('click', () => fetchAndDisplayMeals(dish));
-        dropdown.appendChild(item);
+        const listItem = document.createElement('li'); 
+        const link = document.createElement('a'); 
+        link.className = 'dropdown-item'; 
+        link.href = '#'; 
+        link.textContent = dish; 
+        link.addEventListener('click', (event) => {
+            event.preventDefault(); 
+            fetchAndDisplayMeals(dish); 
+        });
+        listItem.appendChild(link); 
+        dropdown.appendChild(listItem); 
     });
 }
+
+
 
 function compileDishTypes() {
     const dishTypes = new Set();
