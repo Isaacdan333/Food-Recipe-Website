@@ -43,10 +43,12 @@ nav {
 }
 
 .dropdown {
-  margin: 0px;
-  padding: 0px;
+  display: flex;
+  margin: 10px;
+  padding: 10px;
   height: auto;
-  max-width: 155px;
+  max-width: 200px;
+  gap: 20px;
 }
 
 .dropdown-content {

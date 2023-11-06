@@ -25,6 +25,7 @@ async function fetchRecipes(query = '', fromParam = 0, toParam = 50, clearResult
         if (data.hits) {
             allRecipes = [...allRecipes, ...data.hits]; 
             populateDishTypes();
+            populateCuisineTypes();
             displayRecipes(data.hits, resultsSection);
         }
     } catch (error) {
@@ -144,6 +145,42 @@ async function populateDishTypes() {
         link.addEventListener('click', async (event) => {
             event.preventDefault();
             await fetchAndDisplayMeals(dish);
+        });
+        listItem.appendChild(link);
+        dropdown.appendChild(listItem);
+    });
+}
+
+fetchRecipes('', 0, 50).catch(error => {
+    console.error('Failed to fetch recipes:', error);
+});
+
+
+async function compileCuisineTypes() {
+    const cuisineTypes = new Set();
+    allRecipes.forEach((recipeData) => {
+        if (recipeData.recipe.cuisineType) {
+            recipeData.recipe.cuisineType.forEach((cuisine) => {
+                cuisineTypes.add(cuisine);
+            });
+        }
+    });
+    return Array.from(cuisineTypes);
+}
+
+async function populateCuisineTypes() {
+    const cuisineTypes = await compileCuisineTypes();
+    const dropdown = document.getElementById('cuisine-dropdown');
+    dropdown.innerHTML = ''; 
+    cuisineTypes.forEach((cuisine) => {
+        const listItem = document.createElement('li');
+        const link = document.createElement('a');
+        link.className = 'dropdown-item';
+        link.href = '#';
+        link.textContent = cuisine;
+        link.addEventListener('click', async (event) => {
+            event.preventDefault();
+            await fetchAndDisplayMeals(cuisine);
         });
         listItem.appendChild(link);
         dropdown.appendChild(listItem);
