@@ -37,7 +37,7 @@ let SignInUser = evt => {
                     lastname: snapshot.val().lastname
                 }))
                 sessionStorage.setItem("user-creds", JSON.stringify(credentials.user));
-                window.location.href = 'index.html'
+                window.location.href = 'home.html'
             }
         })
     })
