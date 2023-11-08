@@ -2,36 +2,20 @@ body {
   font-family: "Kanit", sans-serif;
   font-weight: bold;
   padding: 0;
-  background-color: #f4f4f4;
-  /*cursor: url('images/cursor.png'), auto; idk i wanted this to work lol*/
+  background-color: var(--light-bg);
+  cursor: url('images/cursor.png'), auto !important; /*idk i wanted this to work lol*/
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-}
-
-.column {
-  background-color: rgb(255, 254, 254);
-  box-shadow: 2px 2px 12px #aaa;
-}
-
-.mini-column {
-  background-color: rgb(136, 131, 131);
-  padding: 0.5em;
-  text-align: center;
-  font-weight: bold;
-}
-
-.mini-column:hover {
-  transform: scale(1.25);
-  transition: transform 80ms ease-in-out;
-}
-.scrollable {
-  display: flex;
-  overflow-x: auto;
-  white-space: nowrap;
+body .nav-button:hover,
+body .nav-link:hover,
+body .dropdown:hover,
+body .recipe button:hover,
+body #search-input:hover,
+button#dishdropdownButton,
+button#cuisinedropdownButton,
+a.dropdown-item,
+button.btn.btn-secondary.btn-lg.dropdown-toggle.show {
+ cursor: url('images/cursor.png'), pointer !important; 
 }
 
 
@@ -42,23 +26,6 @@ nav {
   padding: 0 10px;
 }
 
-.dropdown {
-  display: flex;
-  margin: 10px;
-  padding: 10px;
-  height: auto;
-  max-width: 400px;
-  gap: 20px;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #ccc;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1000; 
-}
 
 .show {
   display: block;
@@ -101,10 +68,10 @@ nav h1 {
   box-sizing: border-box;
   margin: 0;
   border: 2px solid transparent; 
-  background: #e3e3e3;
-  cursor: pointer;
+  background: var(--light-accent);
+  /*cursor: pointer;*/
   text-decoration: none;
-  color: #333;
+  color: var(--light-text);
   transition: all 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; 
   position: relative; 
   padding: 1em;
@@ -112,7 +79,7 @@ nav h1 {
 }
 
 .nav-button:hover {
-  background: #ccc;
+  background: var(--light-card);
   box-shadow: 0px 4px 10px -2px rgba(0, 0, 0, 0.25);
   transform: translateY(-3px);
 }
@@ -120,11 +87,11 @@ nav h1 {
 
 
 #banner {
-  background-image: url("Banner.png");
+  background-image: url("images/Banner.png");
   background-size: cover;
   background-position: center;
   height: 300px;
-  color: white;
+  color: var(--light-card);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -145,7 +112,7 @@ nav h1 {
   width: 35%;
   height: 50px;
   border-radius: 20px;
-  cursor: pointer;
+  /*cursor: pointer;*/
   transition: 0.3s;
 }
 #search-input:hover {
@@ -154,7 +121,7 @@ nav h1 {
 }
 
 .recipe {
-  background-color: white;
+  background-color: var(--light-bg);
   margin-inline: 20px;
   padding: 20px;
   border-radius: 10px;
@@ -187,10 +154,10 @@ nav h1 {
 
 .recipe button {
   background-color: #50b3a2;
-  color: #fff;
+  color: var(--light-text);
   padding: 10px 20px;
   border: none;
-  cursor: pointer;
+  /*cursor: pointer;*/
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
@@ -203,7 +170,7 @@ nav h1 {
 
 .recipe button:hover {
   background-color: #338977;
-  color: white;
+  color: var(--light-text);
 }
 
 #results {
@@ -259,12 +226,16 @@ body.dark-mode {
   color: var(--dark-text);
 }
 
-body.dark-mode .column {
-  background-color: var(--dark-card);
+body.dark-mode .nav-button,
+body.dark-mode .nav-tabs .nav-item .nav-link {
+  background: var(--dark-accent);
+  color: var(--dark-text);
 }
 
-body.dark-mode .mini-column {
-  background-color: var(--dark-accent);
+body.dark-mode .nav-tabs .nav-item .nav-link:hover,
+body.dark-mode .nav-tabs .nav-item .nav-link.active {
+  background-color: var(--dark-card);
+  color: var(--dark-text);
 }
 
 body.dark-mode nav input,
@@ -274,11 +245,19 @@ body.dark-mode nav a {
   color: var(--dark-text);
 }
 
+body.dark-mode #banner {
+  background-image: url("images/Dark-banner.png"); 
+}
 body.dark-mode .recipe {
   background-color: var(--dark-card);
 }
 
 body.dark-mode .recipe button {
-  background-color: #338977;
+  background-color: #125244;
+  color: var(--dark-text);
+}
+
+body.dark-mode .recipe button:hover {
+  background-color: #2f8572;
   color: var(--dark-text);
 }
