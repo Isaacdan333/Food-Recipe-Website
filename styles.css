@@ -5,7 +5,7 @@ body {
   background-color: var(--light-bg);
   cursor: url('images/cursor.png'), auto !important; /*idk i wanted this to work lol*/
 }
-
+/* remove this and any hidden cursor:pointer, hide the cursir url above to remove spatula cursor^^ */
 body .nav-button:hover,
 body .nav-link:hover,
 body .dropdown:hover,
