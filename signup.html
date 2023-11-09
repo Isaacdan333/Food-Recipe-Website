@@ -102,13 +102,13 @@
       </div>
 </nav>
 
-<form id="MainForm" class="w-50 m-4">
+<form id="MainForm" class="w-50 m-4" action="/login.html" method="post" target="submit">
     <h2 class="mb-3">Sign Up</h2>
     <div class="mb-3">
         <label for="emailInp" class="form-label">Email Address</label>
         <input type="email" class="form-control" id="emailInp" placeholder="Enter your email address" required>
     </div>
-    <div class="mb-3">
+    <div class="mb-3"> 
         <label for="passwordInp" class="form-label">Password</label>
         <input type="password" class="form-control" id="passwordInp" placeholder="Choose a strong password" required>
     </div>
@@ -123,8 +123,7 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Create New User</button>
-    <a href="login.html"><button type="button" class="btn btn-secondary ms-2">Sign In</button></a>
+    <button type="submit" name="submit"class="btn btn-primary" value="login">Create New User</button>
 </form>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxy-d9F7jL-jjXkk-Q2h455rYXK/7HAuoJl-0I4" crossorigin="anonymous"></script>
