@@ -192,26 +192,32 @@ fetchRecipes('', 0, 50).catch(error => {
 });
 
 // Dark Mode Toggle Logic
-document.addEventListener('DOMContentLoaded', function() {
-    const toggleButton = document.getElementById('darkModeToggle');
-    const currentMode = localStorage.getItem('darkMode');
-    
-    if (currentMode === 'enabled') {
-        document.body.classList.add('dark-mode');
-        toggleButton.innerText = "Toggle Light Mode";
+document.getElementById('darkModeToggle').addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+  
+    const iconSun = this.querySelector('.fa-sun');
+    const iconMoon = this.querySelector('.fa-moon');
+    if (document.body.classList.contains('dark-mode')) {
+      iconSun.style.display = 'none';
+      iconMoon.style.display = 'inline-block';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      iconSun.style.display = 'inline-block';
+      iconMoon.style.display = 'none';
+      localStorage.setItem('theme', 'light');
     }
-    
-    toggleButton.addEventListener('click', function() {
-        if (document.body.classList.contains('dark-mode')) {
-            document.body.classList.remove('dark-mode');
-            localStorage.setItem('darkMode', 'disabled');
-            toggleButton.innerText = "Toggle Dark Mode";
-        } else {
-            document.body.classList.add('dark-mode');
-            localStorage.setItem('darkMode', 'enabled');
-            toggleButton.innerText = "Toggle Light Mode";
-        }
-    });
-});
+  });
+  
+  window.onload = function() {
+    const toggleButton = document.getElementById('darkModeToggle');
+    const iconSun = toggleButton.querySelector('.fa-sun');
+    const iconMoon = toggleButton.querySelector('.fa-moon');
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark-mode');
+      iconSun.style.display = 'none';
+      iconMoon.style.display = 'inline-block';
+    }
+  };
+  
 
 searchInput.addEventListener('input', debounce(handleAutoSearch, 500));
