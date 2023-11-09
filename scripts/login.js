@@ -23,7 +23,7 @@ const dbref = ref(db);
 
 let EmailInp = document.getElementById('emailInp');
 let PassInp = document.getElementById('passwordInp');
-let MainForm = document.getElementById('MainForm');
+let MainForm = document.getElementById('loginForm');
 
 let SignInUser = evt => {
     evt.preventDefault();
