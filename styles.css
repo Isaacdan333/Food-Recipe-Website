@@ -3,19 +3,6 @@ body {
   font-weight: bold;
   padding: 0;
   background-color: var(--light-bg);
-  cursor: url('images/cursor.png'), auto !important; /*idk i wanted this to work lol*/
-}
-/* remove this and any hidden cursor:pointer, hide the cursir url above to remove spatula cursor^^ */
-body .nav-button:hover,
-body .nav-link:hover,
-body .dropdown:hover,
-body .recipe button:hover,
-body #search-input:hover,
-button#dishdropdownButton,
-button#cuisinedropdownButton,
-a.dropdown-item,
-button.btn.btn-secondary.btn-lg.dropdown-toggle.show {
- cursor: url('images/cursor.png'), pointer !important; 
 }
 
 
@@ -69,7 +56,7 @@ nav h1 {
   margin: 0;
   border: 2px solid transparent; 
   background: var(--light-accent);
-  /*cursor: pointer;*/
+  cursor: pointer;
   text-decoration: none;
   color: var(--light-text);
   transition: all 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; 
@@ -112,7 +99,7 @@ nav h1 {
   width: 35%;
   height: 50px;
   border-radius: 20px;
-  /*cursor: pointer;*/
+  cursor: pointer;
   transition: 0.3s;
 }
 #search-input:hover {
@@ -157,7 +144,7 @@ nav h1 {
   color: var(--light-text);
   padding: 10px 20px;
   border: none;
-  /*cursor: pointer;*/
+  cursor: pointer;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
