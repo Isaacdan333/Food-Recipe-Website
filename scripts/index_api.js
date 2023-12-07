@@ -1,3 +1,26 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+import { getDatabase, get, ref, child } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAdHFGZGkvS_lBC3HJsrYib6gjQpUAa-nk",
+  authDomain: "recipe-website-c6592.firebaseapp.com",
+  projectId: "recipe-website-c6592",
+  storageBucket: "recipe-website-c6592.appspot.com",
+  messagingSenderId: "64456902131",
+  appId: "1:64456902131:web:5ece7ec3c8045aa63a3e86"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase();
+const auth = getAuth(app);
+const dbref = ref(db);
+
 // API credentials
 const APP_ID = '072eb70b';
 const APP_KEY = 'db7277ebc3842274d74e4a4b9c002cae';
@@ -36,24 +59,29 @@ async function fetchRecipes(query = '', fromParam = 0, toParam = 50, clearResult
 function displayRecipes(recipes, resultsSection) {
     if (recipes.length > 0) {
         resultsSection.innerHTML = '';
+        const auth = getAuth();
+        const user = auth.currentUser; 
+
         recipes.forEach((recipe) => {
-            const servingSize = recipe.recipe.yield || 'N/A';  
+            const servingSize = recipe.recipe.yield || 'N/A';
+            const displayStyle = user ? 'inline-block' : 'none';
             const recipeCard = `
-                 <div class="recipe">
-                     <img src="${recipe.recipe.image}" alt="${recipe.recipe.label}">
-                     <h2>${recipe.recipe.label}</h2>
-                     <p><strong>Calories:</strong> ${Math.round(recipe.recipe.calories)}</p>
-                     <p><strong>Servings:</strong> ${servingSize}</p> 
-                     <button onclick="window.open('${recipe.recipe.url}', '_blank')">Get Recipe</button>
-                     <button class="save-recipe" data-recipe-id="${recipe.recipe.uri}">Save</button>
-                 </div>
-             `;
+                <div class="recipe">
+                    <img src="${recipe.recipe.image}" alt="${recipe.recipe.label}">
+                    <h2>${recipe.recipe.label}</h2>
+                    <p><strong>Calories:</strong> ${Math.round(recipe.recipe.calories)}</p>
+                    <p><strong>Servings:</strong> ${servingSize}</p>
+                    <button onclick="window.open('${recipe.recipe.url}', '_blank')">Get Recipe</button>
+                    <button class="save-recipe" data-recipe-id="${recipe.recipe.uri}" style="display: ${displayStyle};">Save</button>
+                </div>
+            `;
             resultsSection.insertAdjacentHTML('beforeend', recipeCard);
         });
     } else {
         resultsSection.innerHTML = '<p>No recipes found.</p>';
     }
 }
+
 
 function getRandomQuery(queries) {
     const randomIndex = Math.floor(Math.random() * queries.length);
@@ -116,9 +144,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener('click', function(event) {
     if (event.target.classList.contains('save-recipe')) {
-        console.log("Recipe saved");
+        const recipeId = event.target.getAttribute('data-recipe-id');
+        const recipeToSave = allRecipes.find(recipe => recipe.recipe.uri === recipeId);
+        if (recipeToSave) {
+            saveRecipeToLocal(recipeToSave);
+            console.log("Recipe saved");
+        }
     }
 });
+function saveRecipeToLocal(recipe) {
+    let savedRecipes = localStorage.getItem('savedRecipes');
+    savedRecipes = savedRecipes ? JSON.parse(savedRecipes) : [];
+    if (!savedRecipes.some(savedRecipe => savedRecipe.recipe.uri === recipe.recipe.uri)) {
+        savedRecipes.push(recipe);
+        localStorage.setItem('savedRecipes', JSON.stringify(savedRecipes));
+    }
+}
+
 
 async function compileDishTypes() {
     const dishTypes = new Set();

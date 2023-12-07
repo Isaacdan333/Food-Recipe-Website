@@ -173,6 +173,7 @@ nav h1 {
   font-size: 24px;
   padding: 20px;
 }
+
 /* Tab-list styling */
 .nav-tabs {
   display: flex; 
@@ -184,6 +185,7 @@ nav h1 {
   text-align: center; 
 }
 
+
 /* Style the tab buttons */
 .nav-link {
   flex-grow: 1;
@@ -194,6 +196,16 @@ nav h1 {
 }
 
 
+/*for the saved.html portion*/
+#saved-recipes {
+  background-color: var(--light-bg);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 10px;
+  margin-top: 0px;
+  margin-bottom: 25px;
+  padding: 0 20px;
+}
 
 
 
@@ -213,6 +225,9 @@ body.dark-mode {
   color: var(--dark-text);
 }
 
+body.dark-mode #saved-recipes{
+  background-color: var(--dark-bg);
+}
 body.dark-mode .nav-button,
 body.dark-mode .nav-tabs .nav-item .nav-link {
   background: var(--dark-accent);
